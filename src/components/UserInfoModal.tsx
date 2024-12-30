@@ -5,7 +5,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Loader2 } from "lucide-react";
+import { Loader2, Globe, Monitor, MapPin, Flag } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface UserInfoModalProps {
   open: boolean;
@@ -26,10 +27,8 @@ export function UserInfoModal({ open, onOpenChange }: UserInfoModalProps) {
   useEffect(() => {
     if (open) {
       setLoading(true);
-      // Get browser info
       const browser = navigator.userAgent;
       
-      // Fetch IP and location info
       fetch("https://ipapi.co/json/")
         .then((res) => res.json())
         .then((data) => {
@@ -50,36 +49,59 @@ export function UserInfoModal({ open, onOpenChange }: UserInfoModalProps) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-md bg-slate-900/95 backdrop-blur-lg border border-slate-800">
         <DialogHeader>
-          <DialogTitle className="text-2xl mb-4">Your Digital Identity</DialogTitle>
+          <DialogTitle className="text-2xl mb-4 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-400">
+            Your Digital Identity
+          </DialogTitle>
         </DialogHeader>
-        {loading ? (
-          <div className="flex items-center justify-center py-8">
-            <Loader2 className="h-8 w-8 animate-spin text-blue-500" />
-          </div>
-        ) : (
-          <div className="space-y-4">
-            {userInfo && (
-              <>
-                <InfoItem label="IP Address" value={userInfo.ip} />
-                <InfoItem label="Browser" value={userInfo.browser} />
-                <InfoItem label="Location" value={userInfo.location} />
-                <InfoItem label="Country" value={userInfo.country} />
-              </>
-            )}
-          </div>
-        )}
+        <AnimatePresence>
+          {loading ? (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="flex items-center justify-center py-8"
+            >
+              <Loader2 className="h-8 w-8 animate-spin text-blue-400" />
+            </motion.div>
+          ) : (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              className="space-y-4"
+            >
+              {userInfo && (
+                <>
+                  <InfoItem icon={Globe} label="IP Address" value={userInfo.ip} />
+                  <InfoItem icon={Monitor} label="Browser" value={userInfo.browser} />
+                  <InfoItem icon={MapPin} label="Location" value={userInfo.location} />
+                  <InfoItem icon={Flag} label="Country" value={userInfo.country} />
+                </>
+              )}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </DialogContent>
     </Dialog>
   );
 }
 
-function InfoItem({ label, value }: { label: string; value: string }) {
+function InfoItem({ icon: Icon, label, value }: { icon: any; label: string; value: string }) {
   return (
-    <div className="bg-secondary/50 p-3 rounded-lg">
-      <p className="text-sm text-muted-foreground mb-1">{label}</p>
-      <p className="text-sm font-medium">{value}</p>
-    </div>
+    <motion.div
+      initial={{ opacity: 0, x: -20 }}
+      animate={{ opacity: 1, x: 0 }}
+      className="bg-slate-800/50 p-4 rounded-lg border border-slate-700/50 backdrop-blur-sm"
+    >
+      <div className="flex items-center gap-3">
+        <Icon className="h-5 w-5 text-blue-400" />
+        <div className="flex-1">
+          <p className="text-sm text-slate-400 mb-1">{label}</p>
+          <p className="text-sm font-medium text-slate-200">{value}</p>
+        </div>
+      </div>
+    </motion.div>
   );
 }
