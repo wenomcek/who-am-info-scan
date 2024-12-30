@@ -23,10 +23,10 @@ export const MatrixBackground = () => {
     }
 
     const draw = () => {
-      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
+      ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      ctx.fillStyle = "#3b82f6"; // Changed to a brighter blue color
+      ctx.fillStyle = "#00ff41"; // Matrix green color
       ctx.font = `${fontSize}px monospace`;
 
       for (let i = 0; i < drops.length; i++) {
@@ -58,7 +58,7 @@ export const MatrixBackground = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 w-full h-full -z-10 opacity-30" // Increased opacity
+      className="fixed inset-0 w-full h-full -z-10 opacity-50"
     />
   );
 };
