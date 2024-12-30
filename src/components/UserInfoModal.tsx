@@ -49,7 +49,7 @@ export function UserInfoModal({ open, onOpenChange }: UserInfoModalProps) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md rounded-[32px] bg-gray-900/75 backdrop-blur-sm border border-gray-800">
+      <DialogContent className="sm:max-w-md rounded-3xl bg-gray-900/95 backdrop-blur-lg border border-gray-800">
         <DialogHeader>
           <DialogTitle className="text-2xl mb-4 text-center bg-clip-text text-transparent bg-gradient-to-r from-gray-200 to-gray-400">
             Your Digital Identity
