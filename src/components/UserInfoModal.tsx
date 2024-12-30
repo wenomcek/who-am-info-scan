@@ -49,9 +49,9 @@ export function UserInfoModal({ open, onOpenChange }: UserInfoModalProps) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md bg-slate-900/95 backdrop-blur-lg border border-slate-800">
+      <DialogContent className="sm:max-w-md rounded-2xl bg-gray-900/95 backdrop-blur-lg border border-gray-800">
         <DialogHeader>
-          <DialogTitle className="text-2xl mb-4 text-center bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-cyan-400">
+          <DialogTitle className="text-2xl mb-4 text-center bg-clip-text text-transparent bg-gradient-to-r from-gray-200 to-gray-400">
             Your Digital Identity
           </DialogTitle>
         </DialogHeader>
@@ -63,7 +63,7 @@ export function UserInfoModal({ open, onOpenChange }: UserInfoModalProps) {
               exit={{ opacity: 0 }}
               className="flex items-center justify-center py-8"
             >
-              <Loader2 className="h-8 w-8 animate-spin text-blue-400" />
+              <Loader2 className="h-8 w-8 animate-spin text-gray-400" />
             </motion.div>
           ) : (
             <motion.div
@@ -93,13 +93,13 @@ function InfoItem({ icon: Icon, label, value }: { icon: any; label: string; valu
     <motion.div
       initial={{ opacity: 0, x: -20 }}
       animate={{ opacity: 1, x: 0 }}
-      className="bg-slate-800/50 p-4 rounded-lg border border-slate-700/50 backdrop-blur-sm"
+      className="bg-gray-800/50 p-4 rounded-xl border border-gray-700/50 backdrop-blur-sm"
     >
       <div className="flex items-center gap-3">
-        <Icon className="h-5 w-5 text-blue-400" />
+        <Icon className="h-5 w-5 text-gray-400" />
         <div className="flex-1">
-          <p className="text-sm text-slate-400 mb-1">{label}</p>
-          <p className="text-sm font-medium text-slate-200">{value}</p>
+          <p className="text-sm text-gray-400 mb-1">{label}</p>
+          <p className="text-sm font-medium text-gray-200">{value}</p>
         </div>
       </div>
     </motion.div>
