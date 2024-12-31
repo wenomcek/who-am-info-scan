@@ -2,5 +2,14 @@
   "title": "Hvem Er Jeg?",
   "subtitle": "Oppdag detaljert informasjon om din digitale tilstedeværelse med ett klikk",
   "getInfo": "Hent Info",
-  "scanning": "Skanner..."
+  "scanning": "Skanner...",
+  "totalScans": "Totale skanninger",
+  "modalTitle": "Din digitale identitet",
+  "ipAddress": "IP-adresse",
+  "browser": "Nettleser",
+  "location": "Plassering",
+  "country": "Land",
+  "os": "Operativsystem",
+  "device": "Enhetstype",
+  "close": "Lukk"
 }

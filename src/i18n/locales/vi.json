@@ -2,5 +2,14 @@
   "title": "Tôi Là Ai?",
   "subtitle": "Khám phá thông tin chi tiết về sự hiện diện kỹ thuật số của bạn chỉ với một cú nhấp chuột",
   "getInfo": "Lấy Thông Tin",
-  "scanning": "Đang quét..."
+  "scanning": "Đang quét...",
+  "totalScans": "Tổng số lần quét",
+  "modalTitle": "Danh tính số của bạn",
+  "ipAddress": "Địa chỉ IP",
+  "browser": "Trình duyệt",
+  "location": "Vị trí",
+  "country": "Quốc gia",
+  "os": "Hệ điều hành",
+  "device": "Loại thiết bị",
+  "close": "Đóng"
 }

@@ -2,5 +2,14 @@
   "title": "Tko Sam?",
   "subtitle": "Otkrijte detaljne informacije o svojoj digitalnoj prisutnosti jednim klikom",
   "getInfo": "Dohvati Info",
-  "scanning": "Skeniranje..."
+  "scanning": "Skeniranje...",
+  "totalScans": "Ukupno skeniranja",
+  "modalTitle": "Vaš digitalni identitet",
+  "ipAddress": "IP adresa",
+  "browser": "Preglednik",
+  "location": "Lokacija",
+  "country": "Država",
+  "os": "Operativni sustav",
+  "device": "Vrsta uređaja",
+  "close": "Zatvori"
 }

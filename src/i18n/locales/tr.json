@@ -2,5 +2,14 @@
   "title": "Ben Kimim?",
   "subtitle": "Tek tıklamayla dijital varlığınız hakkında detaylı bilgi edinin",
   "getInfo": "Bilgi Al",
-  "scanning": "Taranıyor..."
+  "scanning": "Taranıyor...",
+  "totalScans": "Toplam Tarama",
+  "modalTitle": "Dijital Kimliğiniz",
+  "ipAddress": "IP Adresi",
+  "browser": "Tarayıcı",
+  "location": "Konum",
+  "country": "Ülke",
+  "os": "İşletim Sistemi",
+  "device": "Cihaz Türü",
+  "close": "Kapat"
 }

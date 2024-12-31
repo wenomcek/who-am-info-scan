@@ -2,5 +2,14 @@
   "title": "나는 누구인가?",
   "subtitle": "클릭 한 번으로 당신의 디지털 존재에 대한 자세한 정보를 확인하세요",
   "getInfo": "정보 얻기",
-  "scanning": "스캔 중..."
+  "scanning": "스캔 중...",
+  "totalScans": "총 스캔 횟수",
+  "modalTitle": "당신의 디지털 정체성",
+  "ipAddress": "IP 주소",
+  "browser": "브라우저",
+  "location": "위치",
+  "country": "국가",
+  "os": "운영체제",
+  "device": "기기 유형",
+  "close": "닫기"
 }

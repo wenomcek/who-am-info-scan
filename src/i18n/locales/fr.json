@@ -2,5 +2,14 @@
   "title": "Qui suis-je?",
   "subtitle": "Découvrez des informations détaillées sur votre présence numérique en un seul clic",
   "getInfo": "Obtenir Info",
-  "scanning": "Analyse en cours..."
+  "scanning": "Analyse en cours...",
+  "totalScans": "Analyses totales",
+  "modalTitle": "Votre identité numérique",
+  "ipAddress": "Adresse IP",
+  "browser": "Navigateur",
+  "location": "Emplacement",
+  "country": "Pays",
+  "os": "Système d'exploitation",
+  "device": "Type d'appareil",
+  "close": "Fermer"
 }

@@ -2,5 +2,14 @@
   "title": "Vem Är Jag?",
   "subtitle": "Upptäck detaljerad information om din digitala närvaro med ett klick",
   "getInfo": "Hämta Info",
-  "scanning": "Skannar..."
+  "scanning": "Skannar...",
+  "totalScans": "Totalt antal skanningar",
+  "modalTitle": "Din digitala identitet",
+  "ipAddress": "IP-adress",
+  "browser": "Webbläsare",
+  "location": "Plats",
+  "country": "Land",
+  "os": "Operativsystem",
+  "device": "Enhetstyp",
+  "close": "Stäng"
 }

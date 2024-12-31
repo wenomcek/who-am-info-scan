@@ -2,5 +2,14 @@
   "title": "Wie Ben Ik?",
   "subtitle": "Ontdek gedetailleerde informatie over uw digitale aanwezigheid met één klik",
   "getInfo": "Info Ophalen",
-  "scanning": "Scannen..."
+  "scanning": "Scannen...",
+  "totalScans": "Totaal aantal scans",
+  "modalTitle": "Uw digitale identiteit",
+  "ipAddress": "IP-adres",
+  "browser": "Browser",
+  "location": "Locatie",
+  "country": "Land",
+  "os": "Besturingssysteem",
+  "device": "Apparaattype",
+  "close": "Sluiten"
 }

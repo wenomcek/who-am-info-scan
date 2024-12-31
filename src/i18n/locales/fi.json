@@ -2,5 +2,14 @@
   "title": "Kuka Olen?",
   "subtitle": "Löydä yksityiskohtaista tietoa digitaalisesta läsnäolostasi yhdellä klikkauksella",
   "getInfo": "Hae Tiedot",
-  "scanning": "Skannataan..."
+  "scanning": "Skannataan...",
+  "totalScans": "Skannauksia yhteensä",
+  "modalTitle": "Digitaalinen identiteettisi",
+  "ipAddress": "IP-osoite",
+  "browser": "Selain",
+  "location": "Sijainti",
+  "country": "Maa",
+  "os": "Käyttöjärjestelmä",
+  "device": "Laitetyyppi",
+  "close": "Sulje"
 }

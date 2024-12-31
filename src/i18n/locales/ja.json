@@ -2,5 +2,14 @@
   "title": "私は誰？",
   "subtitle": "ワンクリックであなたのデジタルプレゼンスに関する詳細情報を発見",
   "getInfo": "情報を取得",
-  "scanning": "スキャン中..."
+  "scanning": "スキャン中...",
+  "totalScans": "総スキャン数",
+  "modalTitle": "あなたのデジタルアイデンティティ",
+  "ipAddress": "IPアドレス",
+  "browser": "ブラウザ",
+  "location": "場所",
+  "country": "国",
+  "os": "オペレーティングシステム",
+  "device": "デバイスタイプ",
+  "close": "閉じる"
 }

@@ -2,5 +2,14 @@
   "title": "Cine Sunt?",
   "subtitle": "Descoperă informații detaliate despre prezența ta digitală cu un singur clic",
   "getInfo": "Obține Info",
-  "scanning": "Se scanează..."
+  "scanning": "Se scanează...",
+  "totalScans": "Scanări totale",
+  "modalTitle": "Identitatea ta digitală",
+  "ipAddress": "Adresă IP",
+  "browser": "Browser",
+  "location": "Locație",
+  "country": "Țară",
+  "os": "Sistem de operare",
+  "device": "Tip dispozitiv",
+  "close": "Închide"
 }

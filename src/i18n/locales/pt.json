@@ -2,5 +2,14 @@
   "title": "Quem Sou?",
   "subtitle": "Descubra informações detalhadas sobre sua presença digital com apenas um clique",
   "getInfo": "Obter Info",
-  "scanning": "Escaneando..."
+  "scanning": "Escaneando...",
+  "totalScans": "Total de digitalizações",
+  "modalTitle": "Sua identidade digital",
+  "ipAddress": "Endereço IP",
+  "browser": "Navegador",
+  "location": "Localização",
+  "country": "País",
+  "os": "Sistema operacional",
+  "device": "Tipo de dispositivo",
+  "close": "Fechar"
 }

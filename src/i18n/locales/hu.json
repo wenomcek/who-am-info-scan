@@ -2,5 +2,14 @@
   "title": "Ki Vagyok?",
   "subtitle": "Fedezze fel digitális jelenlétének részletes információit egyetlen kattintással",
   "getInfo": "Információ Kérése",
-  "scanning": "Szkennelés..."
+  "scanning": "Szkennelés...",
+  "totalScans": "Összes szkennelés",
+  "modalTitle": "Az Ön digitális identitása",
+  "ipAddress": "IP cím",
+  "browser": "Böngésző",
+  "location": "Helyszín",
+  "country": "Ország",
+  "os": "Operációs rendszer",
+  "device": "Eszköz típusa",
+  "close": "Bezárás"
 }
