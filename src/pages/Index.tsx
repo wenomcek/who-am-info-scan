@@ -65,7 +65,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-white">
+    <div className="min-h-screen flex flex-col items-center justify-center p-4">
       <EarthGlobe targetLocation={userInfo?.coordinates} />
       <LanguageSelector />
       
@@ -75,10 +75,10 @@ const Index = () => {
         transition={{ duration: 0.5 }}
         className="text-center mb-12 relative z-10"
       >
-        <h1 className="text-6xl font-bold mb-4 text-gray-900">
+        <h1 className="text-6xl font-bold mb-4 text-white">
           {t('title')}
         </h1>
-        <p className="text-lg text-gray-600 max-w-md mx-auto">
+        <p className="text-lg text-gray-300 max-w-md mx-auto">
           {t('subtitle')}
         </p>
       </motion.div>
@@ -92,7 +92,7 @@ const Index = () => {
         <Button
           onClick={handleGetInfo}
           disabled={isLoading}
-          className="text-lg px-8 py-6 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-900 border border-gray-300 transition-all duration-300 shadow-lg disabled:opacity-50 relative overflow-hidden group"
+          className="text-lg px-8 py-6 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/20 transition-all duration-300 shadow-lg disabled:opacity-50 relative overflow-hidden group backdrop-blur-sm"
         >
           {isLoading ? (
             <>
@@ -111,49 +111,49 @@ const Index = () => {
           animate={{ opacity: 1, y: 0 }}
           className="mt-8 space-y-4 w-full max-w-md"
         >
-          <div className="bg-gray-100 p-4 rounded-xl border border-gray-200">
+          <div className="bg-white/10 backdrop-blur-sm p-4 rounded-xl border border-white/20">
             <div className="flex items-center gap-3">
-              <Globe className="h-5 w-5 text-gray-500" />
+              <Globe className="h-5 w-5 text-white" />
               <div>
-                <p className="text-sm text-gray-500">{t('ipAddress')}</p>
-                <p className="text-sm font-medium text-gray-900">{userInfo.ip}</p>
+                <p className="text-sm text-gray-300">{t('ipAddress')}</p>
+                <p className="text-sm font-medium text-white">{userInfo.ip}</p>
               </div>
             </div>
           </div>
           
-          <div className="bg-gray-100 p-4 rounded-xl border border-gray-200">
+          <div className="bg-white/10 backdrop-blur-sm p-4 rounded-xl border border-white/20">
             <div className="flex items-center gap-3">
-              <Monitor className="h-5 w-5 text-gray-500" />
+              <Monitor className="h-5 w-5 text-white" />
               <div>
-                <p className="text-sm text-gray-500">{t('browser')}</p>
-                <p className="text-sm font-medium text-gray-900">{userInfo.browser}</p>
+                <p className="text-sm text-gray-300">{t('browser')}</p>
+                <p className="text-sm font-medium text-white">{userInfo.browser}</p>
               </div>
             </div>
           </div>
           
-          <div className="bg-gray-100 p-4 rounded-xl border border-gray-200">
+          <div className="bg-white/10 backdrop-blur-sm p-4 rounded-xl border border-white/20">
             <div className="flex items-center gap-3">
-              <MapPin className="h-5 w-5 text-gray-500" />
+              <MapPin className="h-5 w-5 text-white" />
               <div>
-                <p className="text-sm text-gray-500">{t('location')}</p>
-                <p className="text-sm font-medium text-gray-900">{userInfo.location}</p>
+                <p className="text-sm text-gray-300">{t('location')}</p>
+                <p className="text-sm font-medium text-white">{userInfo.location}</p>
               </div>
             </div>
           </div>
           
-          <div className="bg-gray-100 p-4 rounded-xl border border-gray-200">
+          <div className="bg-white/10 backdrop-blur-sm p-4 rounded-xl border border-white/20">
             <div className="flex items-center gap-3">
-              <Flag className="h-5 w-5 text-gray-500" />
+              <Flag className="h-5 w-5 text-white" />
               <div>
-                <p className="text-sm text-gray-500">{t('country')}</p>
-                <p className="text-sm font-medium text-gray-900">{userInfo.country}</p>
+                <p className="text-sm text-gray-300">{t('country')}</p>
+                <p className="text-sm font-medium text-white">{userInfo.country}</p>
               </div>
             </div>
           </div>
         </motion.div>
       )}
 
-      <UserCounter className="mt-12 relative z-10" />
+      <UserCounter className="mt-12 relative z-10 text-white" />
     </div>
   );
 };
