@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { UserCounter } from "@/components/UserCounter";
 import { LanguageSelector } from "@/components/LanguageSelector";
 import { useTranslation } from "react-i18next";
 import { EarthGlobe } from "@/components/EarthGlobe";
@@ -72,40 +71,54 @@ const Index = () => {
       </div>
 
       <div className="relative z-10 container mx-auto px-4 py-8">
-        <div className="absolute top-4 right-4 flex items-center gap-2">
+        <div className="absolute top-4 right-4 flex items-center space-x-2">
           <StatsButton />
           <LanguageSelector />
         </div>
         
         <div className="min-h-screen flex flex-col items-center justify-center -mt-[30vh]">
-          <Header />
-          
-          <div className="w-full max-w-md mx-auto space-y-8 flex flex-col items-center">
-            <ScanButton isLoading={isLoading} onClick={handleGetInfo} />
-            
-            <AnimatePresence>
-              {userInfo && (
-                <motion.div 
-                  initial={{ opacity: 0, x: 0, scale: 0.8 }}
-                  animate={{ 
-                    opacity: 1, 
-                    x: -400,
-                    scale: 1,
-                    transition: { 
-                      duration: 3,
-                      x: { delay: 0.5 },
-                      opacity: { duration: 0.3 },
-                      scale: { duration: 0.3 }
-                    }
-                  }}
-                  exit={{ opacity: 0, x: 0 }}
-                  className="fixed left-1/2 top-1/2 -translate-y-1/2 backdrop-blur-sm bg-black/30 p-6 rounded-xl border border-white/10 w-full max-w-md"
+          <AnimatePresence>
+            {!userInfo && (
+              <>
+                <motion.div
+                  initial={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.5 }}
                 >
-                  <UserInfoDisplay userInfo={userInfo} />
+                  <Header />
                 </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
+                <motion.div
+                  initial={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.5 }}
+                  className="w-full max-w-md mx-auto space-y-8 flex flex-col items-center"
+                >
+                  <ScanButton isLoading={isLoading} onClick={handleGetInfo} />
+                </motion.div>
+              </>
+            )}
+          </AnimatePresence>
+            
+          <AnimatePresence>
+            {userInfo && (
+              <motion.div 
+                initial={{ opacity: 0, x: "-50%", scale: 0.8 }}
+                animate={{ 
+                  opacity: 1, 
+                  x: "20%",
+                  scale: 1,
+                  transition: { 
+                    duration: 3,
+                    ease: "easeInOut"
+                  }
+                }}
+                exit={{ opacity: 0, x: "-50%" }}
+                className="fixed left-0 top-1/2 -translate-y-1/2 backdrop-blur-sm bg-black/30 p-6 rounded-xl border border-white/10 w-full max-w-md"
+              >
+                <UserInfoDisplay userInfo={userInfo} />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
       </div>
     </div>
