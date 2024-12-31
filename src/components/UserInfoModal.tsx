@@ -9,6 +9,7 @@ import {
 import { AnimatePresence } from "framer-motion";
 import { LoadingSpinner } from "./LoadingSpinner";
 import { UserInfoDisplay } from "./UserInfoDisplay";
+import { supabase } from "@/integrations/supabase/client";
 
 interface UserInfoModalProps {
   open: boolean;
@@ -34,13 +35,29 @@ export function UserInfoModal({ open, onOpenChange }: UserInfoModalProps) {
       
       fetch("https://ipapi.co/json/")
         .then((res) => res.json())
-        .then((data) => {
-          setUserInfo({
+        .then(async (data) => {
+          const userInfo = {
             ip: data.ip,
             browser: browser,
             location: `${data.city}, ${data.region}`,
             country: data.country_name,
+          };
+          
+          // Store visit in database
+          await supabase.from('visits').insert({
+            user_ip: data.ip,
+            user_browser: browser,
+            user_location: `${data.city}, ${data.region}`,
+            user_country: data.country_name
           });
+
+          // Update online users
+          await supabase.from('online_users').upsert(
+            { user_ip: data.ip, last_seen_at: new Date().toISOString() },
+            { onConflict: 'user_ip' }
+          );
+
+          setUserInfo(userInfo);
           setLoading(false);
         })
         .catch((error) => {
