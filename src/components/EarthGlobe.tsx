@@ -17,7 +17,6 @@ export function EarthGlobe({ targetLocation }: EarthGlobeProps) {
   const mapRef = useRef<any>(null);
 
   useEffect(() => {
-    // Load WebGL Earth API script
     const script = document.createElement('script');
     script.src = 'https://www.webglearth.com/v2/api.js';
     script.async = true;
@@ -31,7 +30,8 @@ export function EarthGlobe({ targetLocation }: EarthGlobeProps) {
 
   useEffect(() => {
     if (mapRef.current && targetLocation) {
-      mapRef.current.setView([targetLocation.latitude, targetLocation.longitude]);
+      // Animate to target location with closer zoom
+      mapRef.current.setView([targetLocation.latitude, targetLocation.longitude], 5);
     }
   }, [targetLocation]);
 
@@ -39,15 +39,14 @@ export function EarthGlobe({ targetLocation }: EarthGlobeProps) {
     if (!window.WE) return;
 
     const map = window.WE.map('earth-map', {
-      center: [0, 0],
-      zoom: 2.5,
+      center: [20, 0], // Initial center point
+      zoom: 2.2, // More zoomed out initially
       dragging: true,
       scrollWheelZoom: true,
       atmosphere: true,
       sky: true
     });
 
-    // Add base layer with higher quality tiles
     window.WE.tileLayer('https://webglearth.github.io/webglearth2-offline/{z}/{x}/{y}.jpg', {
       tileSize: 256,
       bounds: [[-85, -180], [85, 180]],
