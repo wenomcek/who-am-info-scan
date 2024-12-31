@@ -1,5 +1,5 @@
 {
-  "title": "Who AM?",
+  "title": "Who AM I?",
   "subtitle": "Discover detailed information about your digital presence with just one click",
   "getInfo": "Get Info",
   "scanning": "Scanning...",
@@ -8,5 +8,11 @@
   "ipAddress": "IP Address",
   "browser": "Browser",
   "location": "Location",
-  "country": "Country"
+  "country": "Country",
+  "adminDashboard": "Admin Dashboard",
+  "currentlyOnline": "Currently Online",
+  "allTimeVisits": "All Time Visits",
+  "daily": "Daily",
+  "weekly": "Weekly",
+  "monthly": "Monthly"
 }

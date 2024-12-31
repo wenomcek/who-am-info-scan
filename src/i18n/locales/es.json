@@ -8,5 +8,11 @@
   "ipAddress": "Dirección IP",
   "browser": "Navegador",
   "location": "Ubicación",
-  "country": "País"
+  "country": "País",
+  "adminDashboard": "Panel de Administración",
+  "currentlyOnline": "En Línea Ahora",
+  "allTimeVisits": "Visitas Totales",
+  "daily": "Diario",
+  "weekly": "Semanal",
+  "monthly": "Mensual"
 }
