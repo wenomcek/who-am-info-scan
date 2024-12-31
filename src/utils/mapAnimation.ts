@@ -1,6 +1,3 @@
-export const easeInOutCubic = (t: number) => 
-  t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-
 export const animateToPosition = (
   map: any,
   startPos: [number, number],
@@ -10,20 +7,19 @@ export const animateToPosition = (
   duration: number,
   onComplete: () => void
 ) => {
-  const start = performance.now();
+  const startTime = performance.now();
   let animationFrame: number;
 
   const animate = (currentTime: number) => {
-    const elapsed = currentTime - start;
+    const elapsed = currentTime - startTime;
     const progress = Math.min(elapsed / duration, 1);
-    const eased = easeInOutCubic(progress);
 
-    const currentLat = startPos[0] + (targetPos[0] - startPos[0]) * eased;
-    const currentLng = startPos[1] + (targetPos[1] - startPos[1]) * eased;
-    const currentZoom = startZoom + (targetZoom - startZoom) * eased;
+    // Simple linear interpolation
+    const currentLat = startPos[0] + (targetPos[0] - startPos[0]) * progress;
+    const currentLng = startPos[1] + (targetPos[1] - startPos[1]) * progress;
+    const currentZoom = startZoom + (targetZoom - startZoom) * progress;
 
-    map.setPosition([currentLat, currentLng]);
-    map.setZoom(currentZoom);
+    map.setView([currentLat, currentLng], currentZoom);
 
     if (progress < 1) {
       animationFrame = requestAnimationFrame(animate);
