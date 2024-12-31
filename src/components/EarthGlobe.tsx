@@ -40,12 +40,14 @@ export function EarthGlobe({ targetLocation }: EarthGlobeProps) {
 
     const map = window.WE.map('earth-map', {
       center: [0, 0],
-      zoom: 3,
+      zoom: 2.5,
       dragging: true,
-      scrollWheelZoom: true
+      scrollWheelZoom: true,
+      atmosphere: true,
+      sky: true
     });
 
-    // Add base layer
+    // Add base layer with higher quality tiles
     window.WE.tileLayer('https://webglearth.github.io/webglearth2-offline/{z}/{x}/{y}.jpg', {
       tileSize: 256,
       bounds: [[-85, -180], [85, 180]],
@@ -61,7 +63,17 @@ export function EarthGlobe({ targetLocation }: EarthGlobeProps) {
   return (
     <div 
       id="earth-map" 
-      className="absolute inset-0 -z-10 bg-black"
+      className="fixed inset-0 w-full h-full z-[-1]"
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        right: 0,
+        bottom: 0,
+        width: '100vw',
+        height: '100vh',
+        backgroundColor: '#000'
+      }}
     />
   );
 }
