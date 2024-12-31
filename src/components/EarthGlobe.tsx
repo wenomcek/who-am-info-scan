@@ -80,7 +80,10 @@ export function EarthGlobe({ targetLocation }: EarthGlobeProps) {
         if (mapRef.current && targetLocation) {
           markerRef.current = window.WE.marker([targetLocation.latitude, targetLocation.longitude])
             .addTo(mapRef.current)
-            .bindPopup(targetLocation.locationText || "Location", { maxWidth: 120 });
+            .bindPopup(targetLocation.locationText || "Location", { 
+              maxWidth: 120,
+              className: 'text-black' // Add black text color to popup
+            });
 
           if (markerRef.current) {
             markerRef.current.openPopup();
