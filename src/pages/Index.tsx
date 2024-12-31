@@ -6,7 +6,7 @@ import { UserInfoDisplay } from "@/components/UserInfoDisplay";
 import { Header } from "@/components/Header";
 import { ScanButton } from "@/components/ScanButton";
 import { supabase } from "@/integrations/supabase/client";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 
 interface UserInfo {
   ip: string;
@@ -78,43 +78,19 @@ const Index = () => {
           <AnimatePresence>
             {!userInfo && (
               <>
-                <motion.div
-                  initial={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <Header />
-                </motion.div>
-                <motion.div
-                  initial={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.5 }}
-                  className="w-full max-w-md mx-auto space-y-8 flex flex-col items-center"
-                >
+                <Header />
+                <div className="w-full max-w-md mx-auto space-y-8 flex flex-col items-center">
                   <ScanButton isLoading={isLoading} onClick={handleGetInfo} />
-                </motion.div>
+                </div>
               </>
             )}
           </AnimatePresence>
             
           <AnimatePresence>
             {userInfo && (
-              <motion.div 
-                initial={{ opacity: 0, x: "-50%", scale: 0.8 }}
-                animate={{ 
-                  opacity: 1, 
-                  x: "20%",
-                  scale: 1,
-                  transition: { 
-                    duration: 3,
-                    ease: "easeInOut"
-                  }
-                }}
-                exit={{ opacity: 0, x: "-50%" }}
-                className="fixed left-0 top-1/2 -translate-y-1/2 backdrop-blur-sm bg-black/30 p-6 rounded-xl border border-white/10 w-full max-w-md"
-              >
+              <div className="fixed left-0 top-1/2 -translate-y-1/2 backdrop-blur-sm bg-black/30 p-6 rounded-xl border border-white/10 w-full max-w-md">
                 <UserInfoDisplay userInfo={userInfo} />
-              </motion.div>
+              </div>
             )}
           </AnimatePresence>
         </div>

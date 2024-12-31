@@ -38,19 +38,21 @@ export function EarthGlobe({ targetLocation }: EarthGlobeProps) {
       }
 
       // Add new marker with location text
-      const locationText = `${targetLocation.locationText || "You are here!"}`;
+      const locationText = targetLocation.locationText || "Location not specified";
       markerRef.current = window.WE.marker([targetLocation.latitude, targetLocation.longitude])
         .addTo(mapRef.current)
         .bindPopup(locationText, { 
           maxWidth: 150,
-          closeButton: false,
+          closeButton: false
         });
 
       // Show the popup immediately and keep it open
-      markerRef.current.openPopup();
+      if (markerRef.current) {
+        markerRef.current.openPopup();
+      }
 
-      // Animate to target location with closer zoom
-      mapRef.current.setView([targetLocation.latitude, targetLocation.longitude], 5);
+      // Animate to target location
+      mapRef.current.setView([targetLocation.latitude, targetLocation.longitude], 4);
     }
   }, [targetLocation]);
 
