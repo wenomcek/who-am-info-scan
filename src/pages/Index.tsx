@@ -65,96 +65,97 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-4">
+    <>
       <EarthGlobe targetLocation={userInfo?.coordinates} />
-      <LanguageSelector />
-      
-      <motion.div
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="text-center mb-12 relative z-10"
-      >
-        <h1 className="text-6xl font-bold mb-4 text-white">
-          {t('title')}
-        </h1>
-        <p className="text-lg text-gray-300 max-w-md mx-auto">
-          {t('subtitle')}
-        </p>
-      </motion.div>
-
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.2 }}
-        className="relative z-10"
-      >
-        <Button
-          onClick={handleGetInfo}
-          disabled={isLoading}
-          className="text-lg px-8 py-6 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/20 transition-all duration-300 shadow-lg disabled:opacity-50 relative overflow-hidden group backdrop-blur-sm"
-        >
-          {isLoading ? (
-            <>
-              <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-              {t('scanning')}
-            </>
-          ) : (
-            t('getInfo')
-          )}
-        </Button>
-      </motion.div>
-
-      {userInfo && (
+      <div className="relative min-h-screen flex flex-col items-center justify-center p-4" style={{ zIndex: 1 }}>
+        <LanguageSelector />
+        
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="mt-8 space-y-4 w-full max-w-md"
+          transition={{ duration: 0.5 }}
+          className="text-center mb-12"
         >
-          <div className="bg-white/10 backdrop-blur-sm p-4 rounded-xl border border-white/20">
-            <div className="flex items-center gap-3">
-              <Globe className="h-5 w-5 text-white" />
-              <div>
-                <p className="text-sm text-gray-300">{t('ipAddress')}</p>
-                <p className="text-sm font-medium text-white">{userInfo.ip}</p>
-              </div>
-            </div>
-          </div>
-          
-          <div className="bg-white/10 backdrop-blur-sm p-4 rounded-xl border border-white/20">
-            <div className="flex items-center gap-3">
-              <Monitor className="h-5 w-5 text-white" />
-              <div>
-                <p className="text-sm text-gray-300">{t('browser')}</p>
-                <p className="text-sm font-medium text-white">{userInfo.browser}</p>
-              </div>
-            </div>
-          </div>
-          
-          <div className="bg-white/10 backdrop-blur-sm p-4 rounded-xl border border-white/20">
-            <div className="flex items-center gap-3">
-              <MapPin className="h-5 w-5 text-white" />
-              <div>
-                <p className="text-sm text-gray-300">{t('location')}</p>
-                <p className="text-sm font-medium text-white">{userInfo.location}</p>
-              </div>
-            </div>
-          </div>
-          
-          <div className="bg-white/10 backdrop-blur-sm p-4 rounded-xl border border-white/20">
-            <div className="flex items-center gap-3">
-              <Flag className="h-5 w-5 text-white" />
-              <div>
-                <p className="text-sm text-gray-300">{t('country')}</p>
-                <p className="text-sm font-medium text-white">{userInfo.country}</p>
-              </div>
-            </div>
-          </div>
+          <h1 className="text-6xl font-bold mb-4 text-white">
+            {t('title')}
+          </h1>
+          <p className="text-lg text-gray-300 max-w-md mx-auto">
+            {t('subtitle')}
+          </p>
         </motion.div>
-      )}
 
-      <UserCounter className="mt-12 relative z-10 text-white" />
-    </div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 0.2 }}
+        >
+          <Button
+            onClick={handleGetInfo}
+            disabled={isLoading}
+            className="text-lg px-8 py-6 rounded-full bg-white/10 hover:bg-white/20 text-white border border-white/20 transition-all duration-300 shadow-lg disabled:opacity-50 relative overflow-hidden group backdrop-blur-sm"
+          >
+            {isLoading ? (
+              <>
+                <Loader2 className="mr-2 h-5 w-5 animate-spin" />
+                {t('scanning')}
+              </>
+            ) : (
+              t('getInfo')
+            )}
+          </Button>
+        </motion.div>
+
+        {userInfo && (
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            className="mt-8 space-y-4 w-full max-w-md"
+          >
+            <div className="bg-white/10 backdrop-blur-sm p-4 rounded-xl border border-white/20">
+              <div className="flex items-center gap-3">
+                <Globe className="h-5 w-5 text-white" />
+                <div>
+                  <p className="text-sm text-gray-300">{t('ipAddress')}</p>
+                  <p className="text-sm font-medium text-white">{userInfo.ip}</p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="bg-white/10 backdrop-blur-sm p-4 rounded-xl border border-white/20">
+              <div className="flex items-center gap-3">
+                <Monitor className="h-5 w-5 text-white" />
+                <div>
+                  <p className="text-sm text-gray-300">{t('browser')}</p>
+                  <p className="text-sm font-medium text-white">{userInfo.browser}</p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="bg-white/10 backdrop-blur-sm p-4 rounded-xl border border-white/20">
+              <div className="flex items-center gap-3">
+                <MapPin className="h-5 w-5 text-white" />
+                <div>
+                  <p className="text-sm text-gray-300">{t('location')}</p>
+                  <p className="text-sm font-medium text-white">{userInfo.location}</p>
+                </div>
+              </div>
+            </div>
+            
+            <div className="bg-white/10 backdrop-blur-sm p-4 rounded-xl border border-white/20">
+              <div className="flex items-center gap-3">
+                <Flag className="h-5 w-5 text-white" />
+                <div>
+                  <p className="text-sm text-gray-300">{t('country')}</p>
+                  <p className="text-sm font-medium text-white">{userInfo.country}</p>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+
+        <UserCounter className="mt-12 text-white" />
+      </div>
+    </>
   );
 };
 

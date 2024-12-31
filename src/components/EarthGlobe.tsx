@@ -63,7 +63,6 @@ export function EarthGlobe({ targetLocation }: EarthGlobeProps) {
   return (
     <div 
       id="earth-map" 
-      className="fixed inset-0 w-full h-full z-[-1]"
       style={{
         position: 'fixed',
         top: 0,
@@ -72,7 +71,7 @@ export function EarthGlobe({ targetLocation }: EarthGlobeProps) {
         bottom: 0,
         width: '100vw',
         height: '100vh',
-        backgroundColor: '#000'
+        zIndex: 0
       }}
     />
   );
