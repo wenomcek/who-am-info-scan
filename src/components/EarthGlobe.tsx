@@ -1,4 +1,6 @@
 import { useEffect, useRef } from 'react';
+import { initializeMap } from '@/utils/mapInitialization';
+import { animateToPosition } from '@/utils/mapAnimation';
 
 declare global {
   interface Window {
@@ -17,114 +19,70 @@ interface EarthGlobeProps {
 export function EarthGlobe({ targetLocation }: EarthGlobeProps) {
   const mapRef = useRef<any>(null);
   const markerRef = useRef<any>(null);
-  const currentAnimationRef = useRef<any>(null);
+  const cleanupAnimationRef = useRef<(() => void) | null>(null);
 
   useEffect(() => {
     const script = document.createElement('script');
     script.src = 'https://www.webglearth.com/v2/api.js';
     script.async = true;
-    script.onload = initMap;
+    script.onload = () => {
+      const map = initializeMap('earth-map');
+      if (map) mapRef.current = map;
+    };
     document.body.appendChild(script);
 
     return () => {
       document.body.removeChild(script);
+      if (cleanupAnimationRef.current) {
+        cleanupAnimationRef.current();
+      }
     };
   }, []);
 
   useEffect(() => {
-    if (mapRef.current && targetLocation) {
-      // Remove previous marker if it exists
-      if (markerRef.current) {
-        markerRef.current.removeFrom(mapRef.current);
-      }
+    if (!mapRef.current || !targetLocation) return;
 
-      // Cancel any ongoing animation
-      if (currentAnimationRef.current) {
-        cancelAnimationFrame(currentAnimationRef.current);
-      }
-
-      // Get current position
-      const currentPos = mapRef.current.getPosition();
-      const startLat = currentPos[0];
-      const startLng = currentPos[1];
-      const startZoom = mapRef.current.getZoom();
-
-      // Target position
-      const targetLat = targetLocation.latitude;
-      const targetLng = targetLocation.longitude;
-      const targetZoom = 4;
-
-      // Animation duration in milliseconds
-      const duration = 2000;
-      const start = performance.now();
-
-      // Easing function for smooth animation
-      const easeInOutCubic = (t: number) => 
-        t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
-
-      // Animation function
-      const animate = (currentTime: number) => {
-        const elapsed = currentTime - start;
-        const progress = Math.min(elapsed / duration, 1);
-        const eased = easeInOutCubic(progress);
-
-        // Interpolate position and zoom
-        const currentLat = startLat + (targetLat - startLat) * eased;
-        const currentLng = startLng + (targetLng - startLng) * eased;
-        const currentZoom = startZoom + (targetZoom - startZoom) * eased;
-
-        // Update map position and zoom
-        mapRef.current.setPosition([currentLat, currentLng]);
-        mapRef.current.setZoom(currentZoom);
-
-        // Continue animation if not complete
-        if (progress < 1) {
-          currentAnimationRef.current = requestAnimationFrame(animate);
-        } else {
-          // Animation complete, add marker
-          const locationText = targetLocation.locationText || "Location not specified";
-          markerRef.current = window.WE.marker([targetLat, targetLng])
-            .addTo(mapRef.current)
-            .bindPopup(`<div style="text-align: center; color: black; font-weight: bold;">${locationText}</div>`, {
-              maxWidth: 150,
-              closeButton: false
-            });
-
-          // Show the popup immediately and keep it open
-          if (markerRef.current) {
-            markerRef.current.openPopup();
-          }
-        }
-      };
-
-      // Start animation
-      currentAnimationRef.current = requestAnimationFrame(animate);
+    // Remove previous marker if it exists
+    if (markerRef.current) {
+      markerRef.current.removeFrom(mapRef.current);
+      markerRef.current = null;
     }
+
+    // Cancel any ongoing animation
+    if (cleanupAnimationRef.current) {
+      cleanupAnimationRef.current();
+      cleanupAnimationRef.current = null;
+    }
+
+    const currentPos = mapRef.current.getPosition();
+    const startPos: [number, number] = [currentPos[0], currentPos[1]];
+    const targetPos: [number, number] = [targetLocation.latitude, targetLocation.longitude];
+    const startZoom = mapRef.current.getZoom();
+    const targetZoom = 4;
+
+    cleanupAnimationRef.current = animateToPosition(
+      mapRef.current,
+      startPos,
+      targetPos,
+      startZoom,
+      targetZoom,
+      2000,
+      () => {
+        // Add marker after animation completes
+        const locationText = targetLocation.locationText || "Location not specified";
+        markerRef.current = window.WE.marker([targetLocation.latitude, targetLocation.longitude])
+          .addTo(mapRef.current)
+          .bindPopup(
+            `<div style="text-align: center; color: black; font-weight: bold;">${locationText}</div>`,
+            { maxWidth: 150, closeButton: false }
+          );
+
+        if (markerRef.current) {
+          markerRef.current.openPopup();
+        }
+      }
+    );
   }, [targetLocation]);
-
-  const initMap = () => {
-    if (!window.WE) return;
-
-    const map = window.WE.map('earth-map', {
-      center: [20, 0],
-      zoom: 2.2,
-      dragging: true,
-      scrollWheelZoom: true,
-      atmosphere: true,
-      sky: true
-    });
-
-    window.WE.tileLayer('https://webglearth.github.io/webglearth2-offline/{z}/{x}/{y}.jpg', {
-      tileSize: 256,
-      bounds: [[-85, -180], [85, 180]],
-      minZoom: 0,
-      maxZoom: 16,
-      attribution: 'WebGLEarth',
-      tms: true
-    }).addTo(map);
-
-    mapRef.current = map;
-  };
 
   return (
     <div 
