@@ -3,10 +3,12 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
+  DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import { Button } from "@/components/ui/button";
 import { useTranslation } from "react-i18next";
 import { Globe } from "lucide-react";
+import { UserCounter } from "./UserCounter";
 
 const languages = {
   en: "English",
@@ -58,6 +60,10 @@ export const LanguageSelector = () => {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="bg-gray-800/90 backdrop-blur-sm border-gray-700 max-h-[80vh] overflow-y-auto">
+          <div className="px-4 py-2">
+            <UserCounter />
+          </div>
+          <DropdownMenuSeparator className="bg-gray-700" />
           {Object.entries(languages).map(([code, name]) => (
             <DropdownMenuItem key={code} onClick={() => changeLanguage(code)}>
               {name}

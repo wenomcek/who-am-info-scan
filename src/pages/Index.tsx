@@ -5,7 +5,6 @@ import { EarthGlobe } from "@/components/EarthGlobe";
 import { UserInfoDisplay } from "@/components/UserInfoDisplay";
 import { Header } from "@/components/Header";
 import { ScanButton } from "@/components/ScanButton";
-import { StatsButton } from "@/components/StatsButton";
 import { supabase } from "@/integrations/supabase/client";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -17,6 +16,7 @@ interface UserInfo {
   coordinates?: {
     latitude: number;
     longitude: number;
+    locationText?: string;
   };
 }
 
@@ -72,10 +72,7 @@ const Index = () => {
       </div>
 
       <div className="relative z-10 container mx-auto px-4 py-8">
-        <div className="absolute top-4 right-4 flex flex-col gap-2">
-          <LanguageSelector />
-          <StatsButton />
-        </div>
+        <LanguageSelector />
         
         <div className="min-h-screen flex flex-col items-center justify-center">
           <AnimatePresence>
