@@ -27,6 +27,18 @@ export function EarthGlobe({ targetLocation }: EarthGlobeProps) {
     script.src = 'https://www.webglearth.com/v2/api.js';
     script.async = true;
 
+    // Add custom styles for the popup
+    const style = document.createElement('style');
+    style.textContent = `
+      .we-pp {
+        color: black !important;
+      }
+      .we-pp-wrapper {
+        color: black !important;
+      }
+    `;
+    document.head.appendChild(style);
+
     script.onload = () => {
       const map = initializeMap('earth-map');
       if (map) {
@@ -41,6 +53,9 @@ export function EarthGlobe({ targetLocation }: EarthGlobeProps) {
     return () => {
       if (script.parentNode) {
         script.parentNode.removeChild(script);
+      }
+      if (style.parentNode) {
+        style.parentNode.removeChild(style);
       }
       if (cleanupRef.current) {
         cleanupRef.current();
@@ -82,7 +97,7 @@ export function EarthGlobe({ targetLocation }: EarthGlobeProps) {
             .addTo(mapRef.current)
             .bindPopup(targetLocation.locationText || "Location", { 
               maxWidth: 120,
-              className: 'text-black' // Add black text color to popup
+              className: 'we-pp'
             });
 
           if (markerRef.current) {
