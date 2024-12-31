@@ -17,6 +17,7 @@ interface EarthGlobeProps {
 export function EarthGlobe({ targetLocation }: EarthGlobeProps) {
   const mapRef = useRef<any>(null);
   const markerRef = useRef<any>(null);
+  const currentAnimationRef = useRef<any>(null);
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -37,22 +38,67 @@ export function EarthGlobe({ targetLocation }: EarthGlobeProps) {
         markerRef.current.removeFrom(mapRef.current);
       }
 
-      // Add new marker with location text
-      const locationText = targetLocation.locationText || "Location not specified";
-      markerRef.current = window.WE.marker([targetLocation.latitude, targetLocation.longitude])
-        .addTo(mapRef.current)
-        .bindPopup(`<div style="text-align: center; color: black; font-weight: bold;">${locationText}</div>`, { 
-          maxWidth: 150,
-          closeButton: false
-        });
-
-      // Show the popup immediately and keep it open
-      if (markerRef.current) {
-        markerRef.current.openPopup();
+      // Cancel any ongoing animation
+      if (currentAnimationRef.current) {
+        cancelAnimationFrame(currentAnimationRef.current);
       }
 
-      // Animate to target location
-      mapRef.current.setView([targetLocation.latitude, targetLocation.longitude], 4);
+      // Get current position
+      const currentPos = mapRef.current.getPosition();
+      const startLat = currentPos[0];
+      const startLng = currentPos[1];
+      const startZoom = mapRef.current.getZoom();
+
+      // Target position
+      const targetLat = targetLocation.latitude;
+      const targetLng = targetLocation.longitude;
+      const targetZoom = 4;
+
+      // Animation duration in milliseconds
+      const duration = 2000;
+      const start = performance.now();
+
+      // Easing function for smooth animation
+      const easeInOutCubic = (t: number) => 
+        t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+      // Animation function
+      const animate = (currentTime: number) => {
+        const elapsed = currentTime - start;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = easeInOutCubic(progress);
+
+        // Interpolate position and zoom
+        const currentLat = startLat + (targetLat - startLat) * eased;
+        const currentLng = startLng + (targetLng - startLng) * eased;
+        const currentZoom = startZoom + (targetZoom - startZoom) * eased;
+
+        // Update map position and zoom
+        mapRef.current.setPosition([currentLat, currentLng]);
+        mapRef.current.setZoom(currentZoom);
+
+        // Continue animation if not complete
+        if (progress < 1) {
+          currentAnimationRef.current = requestAnimationFrame(animate);
+        } else {
+          // Animation complete, add marker
+          const locationText = targetLocation.locationText || "Location not specified";
+          markerRef.current = window.WE.marker([targetLat, targetLng])
+            .addTo(mapRef.current)
+            .bindPopup(`<div style="text-align: center; color: black; font-weight: bold;">${locationText}</div>`, {
+              maxWidth: 150,
+              closeButton: false
+            });
+
+          // Show the popup immediately and keep it open
+          if (markerRef.current) {
+            markerRef.current.openPopup();
+          }
+        }
+      };
+
+      // Start animation
+      currentAnimationRef.current = requestAnimationFrame(animate);
     }
   }, [targetLocation]);
 
