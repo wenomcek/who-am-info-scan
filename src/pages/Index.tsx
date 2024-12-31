@@ -4,7 +4,6 @@ import { UserInfoModal } from "@/components/UserInfoModal";
 import { UserCounter } from "@/components/UserCounter";
 import { motion } from "framer-motion";
 import { Loader2 } from "lucide-react";
-import { MatrixBackground } from "@/components/MatrixBackground";
 import { LanguageSelector } from "@/components/LanguageSelector";
 import { useTranslation } from "react-i18next";
 
@@ -21,8 +20,7 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-slate-900">
-      <MatrixBackground />
+    <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-white">
       <LanguageSelector />
       
       <motion.div
@@ -31,10 +29,10 @@ const Index = () => {
         transition={{ duration: 0.5 }}
         className="text-center mb-12 relative z-10"
       >
-        <h1 className="text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-gray-200 to-gray-400">
+        <h1 className="text-6xl font-bold mb-4 text-gray-900">
           {t('title')}
         </h1>
-        <p className="text-lg text-gray-400 max-w-md mx-auto">
+        <p className="text-lg text-gray-600 max-w-md mx-auto">
           {t('subtitle')}
         </p>
       </motion.div>
@@ -48,7 +46,7 @@ const Index = () => {
         <Button
           onClick={handleGetInfo}
           disabled={isLoading}
-          className="text-lg px-8 py-6 rounded-full bg-gray-800/80 hover:bg-gray-700/80 text-gray-200 border border-gray-700/50 backdrop-blur-sm transition-all duration-300 shadow-lg hover:shadow-gray-700/20 disabled:opacity-50 relative overflow-hidden group"
+          className="text-lg px-8 py-6 rounded-full bg-gray-100 hover:bg-gray-200 text-gray-900 border border-gray-300 transition-all duration-300 shadow-lg disabled:opacity-50 relative overflow-hidden group"
         >
           {isLoading ? (
             <>
@@ -58,12 +56,6 @@ const Index = () => {
           ) : (
             t('getInfo')
           )}
-          <motion.div
-            className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-400/10 to-transparent"
-            initial={{ x: "-100%" }}
-            animate={isLoading ? { x: "100%" } : { x: "-100%" }}
-            transition={{ duration: 1, repeat: isLoading ? Infinity : 0 }}
-          />
         </Button>
       </motion.div>
 
