@@ -11,7 +11,6 @@ export function UserCounter({ className = "" }: UserCounterProps) {
   const { t } = useTranslation();
 
   useEffect(() => {
-    // Initial fetch of visit count
     const fetchVisitCount = async () => {
       const { count } = await supabase
         .from('visits')
@@ -22,7 +21,6 @@ export function UserCounter({ className = "" }: UserCounterProps) {
 
     fetchVisitCount();
 
-    // Subscribe to changes
     const channel = supabase
       .channel('schema-db-changes')
       .on(

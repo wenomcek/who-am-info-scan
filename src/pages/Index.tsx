@@ -6,7 +6,9 @@ import { EarthGlobe } from "@/components/EarthGlobe";
 import { UserInfoDisplay } from "@/components/UserInfoDisplay";
 import { Header } from "@/components/Header";
 import { ScanButton } from "@/components/ScanButton";
+import { StatsButton } from "@/components/StatsButton";
 import { supabase } from "@/integrations/supabase/client";
+import { AnimatePresence, motion } from "framer-motion";
 
 interface UserInfo {
   ip: string;
@@ -64,33 +66,45 @@ const Index = () => {
 
   return (
     <div className="min-h-screen w-full relative">
-      {/* Background with Earth */}
       <div className="fixed inset-0">
         <EarthGlobe targetLocation={userInfo?.coordinates} />
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-transparent pointer-events-none" />
       </div>
 
-      {/* Content overlay */}
       <div className="relative z-10 container mx-auto px-4 py-8">
-        <div className="absolute top-4 right-4">
+        <div className="absolute top-4 right-4 flex gap-4">
+          <StatsButton />
           <LanguageSelector />
         </div>
         
-        <div className="min-h-screen flex flex-col items-center justify-center -mt-20">
+        <div className="min-h-screen flex flex-col items-center justify-center -mt-[30vh]">
           <Header />
           
           <div className="w-full max-w-md mx-auto space-y-8 flex flex-col items-center">
             <ScanButton isLoading={isLoading} onClick={handleGetInfo} />
             
-            {userInfo && (
-              <div 
-                className="fixed left-8 top-1/2 -translate-y-1/2 transition-all duration-1000 ease-in-out backdrop-blur-sm bg-black/30 p-6 rounded-xl border border-white/10 w-full max-w-md"
-              >
-                <UserInfoDisplay userInfo={userInfo} />
-              </div>
-            )}
-            
-            <UserCounter className="text-center" />
+            <AnimatePresence>
+              {userInfo && (
+                <motion.div 
+                  initial={{ opacity: 0, x: 0, scale: 0.8 }}
+                  animate={{ 
+                    opacity: 1, 
+                    x: -400,
+                    scale: 1,
+                    transition: { 
+                      duration: 3,
+                      x: { delay: 0.5 },
+                      opacity: { duration: 0.3 },
+                      scale: { duration: 0.3 }
+                    }
+                  }}
+                  exit={{ opacity: 0, x: 0 }}
+                  className="fixed left-1/2 top-1/2 -translate-y-1/2 backdrop-blur-sm bg-black/30 p-6 rounded-xl border border-white/10 w-full max-w-md"
+                >
+                  <UserInfoDisplay userInfo={userInfo} />
+                </motion.div>
+              )}
+            </AnimatePresence>
           </div>
         </div>
       </div>
