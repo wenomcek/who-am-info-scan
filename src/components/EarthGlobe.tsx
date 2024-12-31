@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
 interface EarthGlobeProps {
   targetLocation?: {
@@ -32,7 +32,7 @@ export function EarthGlobe({ targetLocation }: EarthGlobeProps) {
 
     // Earth setup
     const earthGeometry = new THREE.SphereGeometry(5, 64, 64);
-    const earthTexture = new THREE.TextureLoader().load('/earth-texture.jpg');
+    const earthTexture = new THREE.TextureLoader().load('/lovable-uploads/96ce44e8-7b92-4df0-b2c6-cddd4b7c5b94.png');
     const earthMaterial = new THREE.MeshPhongMaterial({
       map: earthTexture,
       bumpMap: earthTexture,
