@@ -22,10 +22,10 @@ export function UserInfoDisplay({ userInfo }: UserInfoDisplayProps) {
       exit={{ opacity: 0, y: -20 }}
       className="space-y-4"
     >
-      <InfoItem icon={Globe} label={t('ipAddress')} value={userInfo.ip} />
-      <InfoItem icon={Monitor} label={t('browser')} value={userInfo.browser} />
-      <InfoItem icon={MapPin} label={t('location')} value={userInfo.location} />
-      <InfoItem icon={Flag} label={t('country')} value={userInfo.country} />
+      <InfoItem icon={Globe} label={t("ipAddress")} value={userInfo.ip} />
+      <InfoItem icon={Monitor} label={t("browser")} value={userInfo.browser} />
+      <InfoItem icon={MapPin} label={t("location")} value={userInfo.location} />
+      <InfoItem icon={Flag} label={t("country")} value={userInfo.country} />
     </motion.div>
   );
 }

@@ -71,6 +71,10 @@ i18n
       hr: { translation: hr }
     },
     fallbackLng: 'en',
+    detection: {
+      order: ['navigator'],
+      caches: []
+    },
     interpolation: {
       escapeValue: false
     }
