@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   Dialog,
   DialogContent,
@@ -23,6 +24,7 @@ interface UserInfo {
 export function UserInfoModal({ open, onOpenChange }: UserInfoModalProps) {
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
   const [loading, setLoading] = useState(true);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (open) {
@@ -52,7 +54,7 @@ export function UserInfoModal({ open, onOpenChange }: UserInfoModalProps) {
       <DialogContent className="sm:max-w-md rounded-[32px] bg-gray-900/75 backdrop-blur-sm border border-gray-800">
         <DialogHeader>
           <DialogTitle className="text-2xl mb-4 text-center bg-clip-text text-transparent bg-gradient-to-r from-gray-200 to-gray-400">
-            Your Digital Identity
+            {t('modalTitle')}
           </DialogTitle>
         </DialogHeader>
         <AnimatePresence>
@@ -74,10 +76,10 @@ export function UserInfoModal({ open, onOpenChange }: UserInfoModalProps) {
             >
               {userInfo && (
                 <>
-                  <InfoItem icon={Globe} label="IP Address" value={userInfo.ip} />
-                  <InfoItem icon={Monitor} label="Browser" value={userInfo.browser} />
-                  <InfoItem icon={MapPin} label="Location" value={userInfo.location} />
-                  <InfoItem icon={Flag} label="Country" value={userInfo.country} />
+                  <InfoItem icon={Globe} label={t('ipAddress')} value={userInfo.ip} />
+                  <InfoItem icon={Monitor} label={t('browser')} value={userInfo.browser} />
+                  <InfoItem icon={MapPin} label={t('location')} value={userInfo.location} />
+                  <InfoItem icon={Flag} label={t('country')} value={userInfo.country} />
                 </>
               )}
             </motion.div>

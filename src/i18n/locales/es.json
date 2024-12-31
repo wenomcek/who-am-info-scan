@@ -2,5 +2,11 @@
   "title": "¿Quién Soy?",
   "subtitle": "Descubre información detallada sobre tu presencia digital con un solo clic",
   "getInfo": "Obtener Info",
-  "scanning": "Escaneando..."
+  "scanning": "Escaneando...",
+  "totalScans": "Escaneos Totales",
+  "modalTitle": "Tu Identidad Digital",
+  "ipAddress": "Dirección IP",
+  "browser": "Navegador",
+  "location": "Ubicación",
+  "country": "País"
 }

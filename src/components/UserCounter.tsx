@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useTranslation } from "react-i18next";
 
 interface UserCounterProps {
   className?: string;
@@ -6,6 +7,7 @@ interface UserCounterProps {
 
 export function UserCounter({ className = "" }: UserCounterProps) {
   const [count, setCount] = useState(0);
+  const { t } = useTranslation();
 
   useEffect(() => {
     // Start with a random number between 5000 and 10000
@@ -23,7 +25,7 @@ export function UserCounter({ className = "" }: UserCounterProps) {
   return (
     <div className={`text-muted-foreground ${className}`}>
       <p className="text-sm">
-        Total Scans: <span className="font-bold text-blue-400">{count.toLocaleString()}</span>
+        {t('totalScans')}: <span className="font-bold text-blue-400">{count.toLocaleString()}</span>
       </p>
     </div>
   );

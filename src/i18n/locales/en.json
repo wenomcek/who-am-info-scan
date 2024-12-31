@@ -2,5 +2,11 @@
   "title": "Who AM?",
   "subtitle": "Discover detailed information about your digital presence with just one click",
   "getInfo": "Get Info",
-  "scanning": "Scanning..."
+  "scanning": "Scanning...",
+  "totalScans": "Total Scans",
+  "modalTitle": "Your Digital Identity",
+  "ipAddress": "IP Address",
+  "browser": "Browser",
+  "location": "Location",
+  "country": "Country"
 }
