@@ -72,7 +72,7 @@ const Index = () => {
       </div>
 
       <div className="relative z-10 container mx-auto px-4 py-8">
-        <div className="absolute top-4 right-4 flex gap-4">
+        <div className="absolute top-4 right-4 flex items-center gap-2">
           <StatsButton />
           <LanguageSelector />
         </div>
