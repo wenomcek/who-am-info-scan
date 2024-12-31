@@ -79,7 +79,7 @@ const Index = () => {
         <div className="min-h-screen flex flex-col items-center justify-center -mt-20">
           <Header />
           
-          <div className="w-full max-w-md mx-auto space-y-8 flex flex-col items-center">
+          <div className={`transition-all duration-500 ${userInfo ? 'transform -translate-x-1/3' : ''} w-full max-w-md mx-auto space-y-8 flex flex-col items-center`}>
             <ScanButton isLoading={isLoading} onClick={handleGetInfo} />
             
             {userInfo && (

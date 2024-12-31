@@ -15,6 +15,7 @@ interface EarthGlobeProps {
 
 export function EarthGlobe({ targetLocation }: EarthGlobeProps) {
   const mapRef = useRef<any>(null);
+  const markerRef = useRef<any>(null);
 
   useEffect(() => {
     const script = document.createElement('script');
@@ -30,6 +31,16 @@ export function EarthGlobe({ targetLocation }: EarthGlobeProps) {
 
   useEffect(() => {
     if (mapRef.current && targetLocation) {
+      // Remove previous marker if it exists
+      if (markerRef.current) {
+        markerRef.current.removeFrom(mapRef.current);
+      }
+
+      // Add new marker
+      markerRef.current = window.WE.marker([targetLocation.latitude, targetLocation.longitude])
+        .addTo(mapRef.current)
+        .bindPopup("You are here!", { maxWidth: 120 });
+
       // Animate to target location with closer zoom
       mapRef.current.setView([targetLocation.latitude, targetLocation.longitude], 5);
     }
