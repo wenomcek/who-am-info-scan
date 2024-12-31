@@ -40,6 +40,7 @@ const Index = () => {
         coordinates: {
           latitude: data.latitude,
           longitude: data.longitude,
+          locationText: `${data.city} (${data.country_name})`
         },
       };
 

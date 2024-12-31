@@ -10,6 +10,7 @@ interface EarthGlobeProps {
   targetLocation?: {
     latitude: number;
     longitude: number;
+    locationText?: string;
   };
 }
 
@@ -36,10 +37,17 @@ export function EarthGlobe({ targetLocation }: EarthGlobeProps) {
         markerRef.current.removeFrom(mapRef.current);
       }
 
-      // Add new marker
+      // Add new marker with location text
+      const locationText = `${targetLocation.locationText || "You are here!"}`;
       markerRef.current = window.WE.marker([targetLocation.latitude, targetLocation.longitude])
         .addTo(mapRef.current)
-        .bindPopup("You are here!", { maxWidth: 120 });
+        .bindPopup(locationText, { 
+          maxWidth: 150,
+          closeButton: false,
+        });
+
+      // Show the popup immediately and keep it open
+      markerRef.current.openPopup();
 
       // Animate to target location with closer zoom
       mapRef.current.setView([targetLocation.latitude, targetLocation.longitude], 5);
@@ -50,8 +58,8 @@ export function EarthGlobe({ targetLocation }: EarthGlobeProps) {
     if (!window.WE) return;
 
     const map = window.WE.map('earth-map', {
-      center: [20, 0], // Initial center point
-      zoom: 2.2, // More zoomed out initially
+      center: [20, 0],
+      zoom: 2.2,
       dragging: true,
       scrollWheelZoom: true,
       atmosphere: true,
