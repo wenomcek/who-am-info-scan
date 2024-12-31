@@ -63,21 +63,32 @@ const Index = () => {
   };
 
   return (
-    <div className="relative min-h-screen w-full">
-      {/* Background */}
-      <div className="fixed inset-0 bg-gradient-to-b from-black/50 to-transparent z-0" />
-      <EarthGlobe targetLocation={userInfo?.coordinates} />
-      
-      {/* Main content overlay */}
-      <div className="relative z-10 min-h-screen flex flex-col items-center justify-start p-4 pt-20">
+    <div className="min-h-screen w-full relative">
+      {/* Background with Earth */}
+      <div className="fixed inset-0">
+        <EarthGlobe targetLocation={userInfo?.coordinates} />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-transparent pointer-events-none" />
+      </div>
+
+      {/* Content overlay */}
+      <div className="relative z-10 container mx-auto px-4 py-8">
         <LanguageSelector />
-        <Header />
         
-        <ScanButton isLoading={isLoading} onClick={handleGetInfo} />
-
-        {userInfo && <UserInfoDisplay userInfo={userInfo} />}
-
-        <UserCounter className="mt-12 text-white" />
+        <div className="mt-20 flex flex-col items-center gap-8">
+          <Header />
+          
+          <div className="w-full max-w-md mx-auto space-y-8">
+            <ScanButton isLoading={isLoading} onClick={handleGetInfo} />
+            
+            {userInfo && (
+              <div className="backdrop-blur-sm bg-black/30 p-6 rounded-xl border border-white/10">
+                <UserInfoDisplay userInfo={userInfo} />
+              </div>
+            )}
+            
+            <UserCounter className="text-center" />
+          </div>
+        </div>
       </div>
     </div>
   );
