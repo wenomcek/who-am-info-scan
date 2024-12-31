@@ -114,13 +114,13 @@ export function EarthGlobe({ targetLocation }: EarthGlobeProps) {
       sky: true
     });
 
-    window.WE.tileLayer('https://webglearth.github.io/webglearth2-offline/{z}/{x}/{y}.jpg', {
+    // Use OpenStreetMap tiles instead of the default WebGLEarth tiles
+    window.WE.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       tileSize: 256,
       bounds: [[-85, -180], [85, 180]],
       minZoom: 0,
       maxZoom: 16,
-      attribution: 'WebGLEarth',
-      tms: true
+      attribution: '© OpenStreetMap contributors',
     }).addTo(map);
 
     mapRef.current = map;
