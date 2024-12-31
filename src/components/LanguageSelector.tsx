@@ -49,6 +49,8 @@ export const LanguageSelector = () => {
 
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng);
+    // Force a reload of the page to ensure all translations are updated
+    window.location.reload();
   };
 
   return (

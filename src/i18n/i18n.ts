@@ -72,8 +72,8 @@ i18n
     },
     fallbackLng: 'en',
     detection: {
-      order: ['navigator'],
-      caches: []
+      order: ['navigator', 'htmlTag', 'path', 'subdomain'],
+      caches: [], // Disable caching to ensure language changes take effect immediately
     },
     interpolation: {
       escapeValue: false
