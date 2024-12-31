@@ -9,10 +9,7 @@
   "browser": "Navegador",
   "location": "Ubicación",
   "country": "País",
-  "adminDashboard": "Panel de Administración",
-  "currentlyOnline": "En Línea Ahora",
-  "allTimeVisits": "Visitas Totales",
-  "daily": "Diario",
-  "weekly": "Semanal",
-  "monthly": "Mensual"
+  "os": "Sistema Operativo",
+  "device": "Tipo de Dispositivo",
+  "close": "Cerrar"
 }

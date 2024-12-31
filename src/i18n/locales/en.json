@@ -9,10 +9,7 @@
   "browser": "Browser",
   "location": "Location",
   "country": "Country",
-  "adminDashboard": "Admin Dashboard",
-  "currentlyOnline": "Currently Online",
-  "allTimeVisits": "All Time Visits",
-  "daily": "Daily",
-  "weekly": "Weekly",
-  "monthly": "Monthly"
+  "os": "Operating System",
+  "device": "Device Type",
+  "close": "Close"
 }

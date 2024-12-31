@@ -10,31 +10,44 @@ export const MatrixBackground = () => {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
-    canvas.height = window.innerHeight;
-    canvas.width = window.innerWidth;
+    // Set canvas size to window size
+    const resizeCanvas = () => {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    };
+    resizeCanvas();
+    window.addEventListener("resize", resizeCanvas);
 
-    const matrix = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789@#$%^&*()*&^%+-/~{[|`]}";
-    const matrixChars = matrix.split("");
-
-    const fontSize = 10;
+    // Matrix characters
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()";
+    const charArray = chars.split("");
+    const fontSize = 14;
     const columns = canvas.width / fontSize;
     const drops: number[] = [];
 
-    for (let x = 0; x < columns; x++) {
-      drops[x] = 1;
+    // Initialize drops
+    for (let i = 0; i < columns; i++) {
+      drops[i] = 1;
     }
 
+    // Drawing function
     const draw = () => {
-      ctx.fillStyle = "rgba(0, 0, 0, 0.04)";
+      // Black BG for the canvas, translucent to show trail
+      ctx.fillStyle = "rgba(0, 0, 0, 0.05)";
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      ctx.fillStyle = "#0F0"; // Matrix green color
-      ctx.font = fontSize + "px monospace";
+      ctx.fillStyle = "#0F0"; // Green text
+      ctx.font = `${fontSize}px monospace`;
 
+      // Loop over drops
       for (let i = 0; i < drops.length; i++) {
-        const text = matrixChars[Math.floor(Math.random() * matrixChars.length)];
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+        // Random character
+        const char = charArray[Math.floor(Math.random() * charArray.length)];
+        
+        // Draw the character
+        ctx.fillText(char, i * fontSize, drops[i] * fontSize);
 
+        // Reset drop if it reaches bottom or randomly
         if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
           drops[i] = 0;
         }
@@ -43,18 +56,12 @@ export const MatrixBackground = () => {
       }
     };
 
-    const interval = setInterval(draw, 35);
-
-    const handleResize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
-    };
-
-    window.addEventListener("resize", handleResize);
+    // Animation loop
+    const interval = setInterval(draw, 33);
 
     return () => {
       clearInterval(interval);
-      window.removeEventListener("resize", handleResize);
+      window.removeEventListener("resize", resizeCanvas);
     };
   }, []);
 
@@ -68,7 +75,6 @@ export const MatrixBackground = () => {
         width: "100%",
         height: "100%",
         zIndex: -1,
-        background: "black"
       }}
     />
   );
