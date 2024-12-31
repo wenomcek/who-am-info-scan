@@ -5,10 +5,13 @@ import { UserCounter } from "@/components/UserCounter";
 import { motion } from "framer-motion";
 import { Loader2 } from "lucide-react";
 import { MatrixBackground } from "@/components/MatrixBackground";
+import { LanguageSelector } from "@/components/LanguageSelector";
+import { useTranslation } from "react-i18next";
 
 const Index = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const { t } = useTranslation();
 
   const handleGetInfo = async () => {
     setIsLoading(true);
@@ -20,6 +23,7 @@ const Index = () => {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4 bg-slate-900">
       <MatrixBackground />
+      <LanguageSelector />
       
       <motion.div
         initial={{ opacity: 0, y: -20 }}
@@ -28,10 +32,10 @@ const Index = () => {
         className="text-center mb-12 relative z-10"
       >
         <h1 className="text-6xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-gray-200 to-gray-400">
-          Who AM?
+          {t('title')}
         </h1>
         <p className="text-lg text-gray-400 max-w-md mx-auto">
-          Discover detailed information about your digital presence with just one click
+          {t('subtitle')}
         </p>
       </motion.div>
 
@@ -49,10 +53,10 @@ const Index = () => {
           {isLoading ? (
             <>
               <Loader2 className="mr-2 h-5 w-5 animate-spin" />
-              Scanning...
+              {t('scanning')}
             </>
           ) : (
-            "Get Info"
+            t('getInfo')
           )}
           <motion.div
             className="absolute inset-0 bg-gradient-to-r from-transparent via-gray-400/10 to-transparent"

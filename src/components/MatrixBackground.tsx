@@ -13,34 +13,38 @@ export const MatrixBackground = () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
 
-    const characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-    const fontSize = 14;
-    const columns = canvas.width / fontSize;
-    const drops: number[] = [];
+    const katakana = 'アァカサタナハマヤャラワガザダバパイィキシチニヒミリヰギジヂビピウゥクスツヌフムユュルグズブヅプエェケセテネヘメレヱゲゼデベペオォコソトノホモヨョロヲゴゾドボポヴッン';
+    const latin = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    const nums = '0123456789';
+    const alphabet = katakana + latin + nums;
 
-    for (let i = 0; i < columns; i++) {
-      drops[i] = 1;
+    const fontSize = 16;
+    const columns = canvas.width / fontSize;
+    const rainDrops: number[] = [];
+
+    for (let x = 0; x < columns; x++) {
+      rainDrops[x] = 1;
     }
 
     const draw = () => {
-      ctx.fillStyle = "rgba(0, 0, 0, 0.1)";
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.05)';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      ctx.fillStyle = "#00ff41"; // Matrix green color
-      ctx.font = `${fontSize}px monospace`;
+      ctx.fillStyle = '#0F0';
+      ctx.font = fontSize + 'px monospace';
 
-      for (let i = 0; i < drops.length; i++) {
-        const text = characters[Math.floor(Math.random() * characters.length)];
-        ctx.fillText(text, i * fontSize, drops[i] * fontSize);
+      for (let i = 0; i < rainDrops.length; i++) {
+        const text = alphabet.charAt(Math.floor(Math.random() * alphabet.length));
+        ctx.fillText(text, i * fontSize, rainDrops[i] * fontSize);
 
-        if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) {
-          drops[i] = 0;
+        if (rainDrops[i] * fontSize > canvas.height && Math.random() > 0.975) {
+          rainDrops[i] = 0;
         }
-        drops[i]++;
+        rainDrops[i]++;
       }
     };
 
-    const interval = setInterval(draw, 33);
+    const interval = setInterval(draw, 30);
 
     const handleResize = () => {
       canvas.width = window.innerWidth;
@@ -58,7 +62,7 @@ export const MatrixBackground = () => {
   return (
     <canvas
       ref={canvasRef}
-      className="fixed inset-0 w-full h-full -z-10 opacity-50"
+      className="fixed inset-0 w-full h-full -z-10 opacity-40"
     />
   );
 };
