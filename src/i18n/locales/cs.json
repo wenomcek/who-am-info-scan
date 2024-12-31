@@ -2,5 +2,14 @@
   "title": "Kdo Jsem?",
   "subtitle": "Objevte podrobné informace o své digitální přítomnosti jediným kliknutím",
   "getInfo": "Získat Info",
-  "scanning": "Skenování..."
+  "scanning": "Skenování...",
+  "totalScans": "Celkem skenování",
+  "modalTitle": "Vaše Digitální Identita",
+  "ipAddress": "IP Adresa",
+  "browser": "Prohlížeč",
+  "location": "Místo",
+  "country": "Země",
+  "os": "Operační Systém",
+  "device": "Typ Zařízení",
+  "close": "Zavřít"
 }
