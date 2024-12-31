@@ -41,7 +41,7 @@ export function EarthGlobe({ targetLocation }: EarthGlobeProps) {
       const locationText = targetLocation.locationText || "Location not specified";
       markerRef.current = window.WE.marker([targetLocation.latitude, targetLocation.longitude])
         .addTo(mapRef.current)
-        .bindPopup(locationText, { 
+        .bindPopup(`<div style="text-align: center; color: black; font-weight: bold;">${locationText}</div>`, { 
           maxWidth: 150,
           closeButton: false
         });
