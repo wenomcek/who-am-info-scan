@@ -71,12 +71,12 @@ const Index = () => {
       </div>
 
       <div className="relative z-10 container mx-auto px-4 py-8">
-        <div className="absolute top-4 right-4 flex items-center space-x-2">
-          <StatsButton />
+        <div className="absolute top-4 right-4 flex flex-col gap-2">
           <LanguageSelector />
+          <StatsButton />
         </div>
         
-        <div className="min-h-screen flex flex-col items-center justify-center -mt-[30vh]">
+        <div className="min-h-screen flex flex-col items-center justify-center">
           <AnimatePresence>
             {!userInfo && (
               <>
