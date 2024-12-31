@@ -65,16 +65,19 @@ const Index = () => {
   };
 
   return (
-    <>
+    <div className="relative min-h-screen w-full">
+      {/* Earth globe as background */}
       <EarthGlobe targetLocation={userInfo?.coordinates} />
-      <div className="relative min-h-screen flex flex-col items-center justify-center p-4" style={{ zIndex: 1 }}>
+      
+      {/* Main content overlay */}
+      <div className="relative z-10 min-h-screen flex flex-col items-center justify-start p-4 pt-20">
         <LanguageSelector />
         
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-12"
+          className="text-center mb-12 bg-black/30 p-8 rounded-xl backdrop-blur-sm border border-white/10"
         >
           <h1 className="text-6xl font-bold mb-4 text-white">
             {t('title')}
@@ -111,7 +114,7 @@ const Index = () => {
             animate={{ opacity: 1, y: 0 }}
             className="mt-8 space-y-4 w-full max-w-md"
           >
-            <div className="bg-white/10 backdrop-blur-sm p-4 rounded-xl border border-white/20">
+            <div className="bg-black/30 backdrop-blur-sm p-4 rounded-xl border border-white/10">
               <div className="flex items-center gap-3">
                 <Globe className="h-5 w-5 text-white" />
                 <div>
@@ -121,7 +124,7 @@ const Index = () => {
               </div>
             </div>
             
-            <div className="bg-white/10 backdrop-blur-sm p-4 rounded-xl border border-white/20">
+            <div className="bg-black/30 backdrop-blur-sm p-4 rounded-xl border border-white/10">
               <div className="flex items-center gap-3">
                 <Monitor className="h-5 w-5 text-white" />
                 <div>
@@ -131,7 +134,7 @@ const Index = () => {
               </div>
             </div>
             
-            <div className="bg-white/10 backdrop-blur-sm p-4 rounded-xl border border-white/20">
+            <div className="bg-black/30 backdrop-blur-sm p-4 rounded-xl border border-white/10">
               <div className="flex items-center gap-3">
                 <MapPin className="h-5 w-5 text-white" />
                 <div>
@@ -141,7 +144,7 @@ const Index = () => {
               </div>
             </div>
             
-            <div className="bg-white/10 backdrop-blur-sm p-4 rounded-xl border border-white/20">
+            <div className="bg-black/30 backdrop-blur-sm p-4 rounded-xl border border-white/10">
               <div className="flex items-center gap-3">
                 <Flag className="h-5 w-5 text-white" />
                 <div>
@@ -155,7 +158,7 @@ const Index = () => {
 
         <UserCounter className="mt-12 text-white" />
       </div>
-    </>
+    </div>
   );
 };
 
