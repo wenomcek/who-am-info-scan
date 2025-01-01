@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { initializeMap } from '@/utils/mapInitialization';
 import { animateToPosition } from '@/utils/mapAnimation';
+import { createMarker } from '@/utils/mapMarker';
 
 declare global {
   interface Window {
@@ -27,7 +28,6 @@ export function EarthGlobe({ targetLocation }: EarthGlobeProps) {
     script.src = 'https://www.webglearth.com/v2/api.js';
     script.async = true;
 
-    // Add custom styles for the popup
     const style = document.createElement('style');
     style.textContent = `
       .we-pp {
@@ -43,7 +43,6 @@ export function EarthGlobe({ targetLocation }: EarthGlobeProps) {
       const map = initializeMap('earth-map');
       if (map) {
         mapRef.current = map;
-        // Set initial position
         map.setView([20.0, 0.0], 2.5);
       }
     };
@@ -51,9 +50,7 @@ export function EarthGlobe({ targetLocation }: EarthGlobeProps) {
     document.body.appendChild(script);
 
     return () => {
-      if (script.parentNode) {
-        script.parentNode.removeChild(script);
-      }
+      document.body.removeChild(script);
       if (style.parentNode) {
         style.parentNode.removeChild(style);
       }
@@ -81,9 +78,8 @@ export function EarthGlobe({ targetLocation }: EarthGlobeProps) {
 
     const currentPos = mapRef.current.getPosition();
     const startPos: [number, number] = [currentPos[0], currentPos[1]];
-    
+
     if (!targetLocation) {
-      // Reset to initial position when no target location is provided
       cleanupRef.current = animateToPosition(
         mapRef.current,
         startPos,
@@ -96,28 +92,21 @@ export function EarthGlobe({ targetLocation }: EarthGlobeProps) {
       return;
     }
 
-    const targetPos: [number, number] = [targetLocation.latitude, targetLocation.longitude];
-
     cleanupRef.current = animateToPosition(
       mapRef.current,
       startPos,
-      targetPos,
+      [targetLocation.latitude, targetLocation.longitude],
       mapRef.current.getZoom(),
       3,
       1500,
       () => {
-        // Add marker after animation
         if (mapRef.current && targetLocation) {
-          markerRef.current = window.WE.marker([targetLocation.latitude, targetLocation.longitude])
-            .addTo(mapRef.current)
-            .bindPopup(targetLocation.locationText || "Location", { 
-              maxWidth: 120,
-              className: 'we-pp'
-            });
-
-          if (markerRef.current) {
-            markerRef.current.openPopup();
-          }
+          markerRef.current = createMarker(
+            mapRef.current,
+            targetLocation.latitude,
+            targetLocation.longitude,
+            targetLocation.locationText
+          );
         }
       }
     );
