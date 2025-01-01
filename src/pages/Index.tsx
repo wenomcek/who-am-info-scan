@@ -73,7 +73,7 @@ const Index = () => {
   return (
     <div className="min-h-screen w-full relative">
       <div className="fixed inset-0">
-        <EarthGlobe targetLocation={userInfo?.coordinates} />
+        <EarthGlobe targetLocation={userInfo?.coordinates} key={userInfo ? 'with-location' : 'default'} />
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-transparent pointer-events-none" />
       </div>
 

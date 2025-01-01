@@ -65,7 +65,7 @@ export function EarthGlobe({ targetLocation }: EarthGlobeProps) {
 
   // Handle target location changes
   useEffect(() => {
-    if (!mapRef.current || !targetLocation) return;
+    if (!mapRef.current) return;
 
     // Remove existing marker
     if (markerRef.current) {
@@ -77,6 +77,20 @@ export function EarthGlobe({ targetLocation }: EarthGlobeProps) {
     if (cleanupRef.current) {
       cleanupRef.current();
       cleanupRef.current = null;
+    }
+
+    if (!targetLocation) {
+      // Reset to initial position when no target location is provided
+      cleanupRef.current = animateToPosition(
+        mapRef.current,
+        mapRef.current.getPosition(),
+        [20.0, 0.0],
+        mapRef.current.getZoom(),
+        2.5,
+        1500,
+        () => {}
+      );
+      return;
     }
 
     const currentPos = mapRef.current.getPosition();
