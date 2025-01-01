@@ -7,6 +7,8 @@ export const animateToPosition = (
   duration: number,
   onComplete: () => void
 ) => {
+  if (!map) return () => {};
+  
   const startTime = performance.now();
   let animationFrame: number;
 
@@ -14,7 +16,7 @@ export const animateToPosition = (
     const elapsed = currentTime - startTime;
     const progress = Math.min(elapsed / duration, 1);
 
-    // Easing function for smoother animation
+    // Cubic easing out for smoother animation
     const easeProgress = 1 - Math.pow(1 - progress, 3);
 
     const currentLat = startPos[0] + (targetPos[0] - startPos[0]) * easeProgress;

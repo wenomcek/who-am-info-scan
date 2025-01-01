@@ -22,11 +22,13 @@ export function EarthGlobe({ targetLocation }: EarthGlobeProps) {
   const markerRef = useRef<any>(null);
   const cleanupRef = useRef<(() => void) | null>(null);
 
+  // Initialize the map
   useEffect(() => {
     const script = document.createElement('script');
     script.src = 'https://www.webglearth.com/v2/api.js';
     script.async = true;
 
+    // Add styles for popup
     const style = document.createElement('style');
     style.textContent = `
       .we-pp {
@@ -39,8 +41,10 @@ export function EarthGlobe({ targetLocation }: EarthGlobeProps) {
     document.head.appendChild(style);
 
     const initMap = () => {
+      console.log('Initializing map...');
       const map = initializeMap('earth-map');
       if (map) {
+        console.log('Map initialized successfully');
         mapRef.current = map;
       }
     };
@@ -59,14 +63,22 @@ export function EarthGlobe({ targetLocation }: EarthGlobeProps) {
     };
   }, []);
 
+  // Handle location updates
   useEffect(() => {
-    if (!mapRef.current) return;
+    if (!mapRef.current) {
+      console.log('Map not initialized yet');
+      return;
+    }
 
+    console.log('Handling location update:', targetLocation);
+
+    // Clean up existing marker
     if (markerRef.current) {
       markerRef.current.removeFrom(mapRef.current);
       markerRef.current = null;
     }
 
+    // Cancel ongoing animation
     if (cleanupRef.current) {
       cleanupRef.current();
       cleanupRef.current = null;
@@ -76,6 +88,7 @@ export function EarthGlobe({ targetLocation }: EarthGlobeProps) {
     const startPos: [number, number] = [currentPos[0], currentPos[1]];
 
     if (!targetLocation) {
+      console.log('No target location, resetting view');
       cleanupRef.current = animateToPosition(
         mapRef.current,
         startPos,
@@ -83,11 +96,14 @@ export function EarthGlobe({ targetLocation }: EarthGlobeProps) {
         mapRef.current.getZoom(),
         2.5,
         1500,
-        () => {}
+        () => {
+          console.log('Reset animation completed');
+        }
       );
       return;
     }
 
+    console.log('Animating to target location:', targetLocation);
     cleanupRef.current = animateToPosition(
       mapRef.current,
       startPos,
@@ -96,6 +112,7 @@ export function EarthGlobe({ targetLocation }: EarthGlobeProps) {
       3,
       1500,
       () => {
+        console.log('Creating marker at target location');
         if (mapRef.current && targetLocation) {
           markerRef.current = createMarker(
             mapRef.current,

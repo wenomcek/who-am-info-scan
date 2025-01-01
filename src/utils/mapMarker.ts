@@ -9,9 +9,10 @@ export const createMarker = (map: any, latitude: number, longitude: number, loca
       className: 'we-pp'
     });
   
+  // Delay popup opening to ensure marker is properly placed
   setTimeout(() => {
     marker.openPopup();
-  }, 100);
+  }, 500);
 
   return marker;
 };
