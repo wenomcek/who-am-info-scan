@@ -78,7 +78,7 @@ const Index = () => {
       </div>
 
       <div className="relative z-10 w-full">
-        <div className="flex justify-between items-start p-4">
+        <div className="flex justify-between items-center w-full p-4">
           <Button
             variant="outline"
             size="icon"
