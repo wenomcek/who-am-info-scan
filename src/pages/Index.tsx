@@ -7,6 +7,8 @@ import { Header } from "@/components/Header";
 import { ScanButton } from "@/components/ScanButton";
 import { supabase } from "@/integrations/supabase/client";
 import { AnimatePresence } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { Home } from "lucide-react";
 
 interface UserInfo {
   ip: string;
@@ -64,6 +66,10 @@ const Index = () => {
     }
   };
 
+  const handleReset = () => {
+    setUserInfo(null);
+  };
+
   return (
     <div className="min-h-screen w-full relative">
       <div className="fixed inset-0">
@@ -72,7 +78,21 @@ const Index = () => {
       </div>
 
       <div className="relative z-10 container mx-auto px-4 py-8">
-        <LanguageSelector />
+        <div className="flex justify-between items-start">
+          {userInfo && (
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={handleReset}
+              className="bg-black/30 border-white/10 hover:bg-black/50"
+            >
+              <Home className="h-4 w-4 text-white" />
+            </Button>
+          )}
+          <div className="ml-auto">
+            <LanguageSelector />
+          </div>
+        </div>
         
         <div className="min-h-screen flex flex-col items-center justify-center">
           <AnimatePresence>
