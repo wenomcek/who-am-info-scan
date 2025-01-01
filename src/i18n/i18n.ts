@@ -72,8 +72,13 @@ i18n
     },
     fallbackLng: 'en',
     detection: {
-      order: ['navigator', 'htmlTag', 'path', 'subdomain'],
-      caches: [], // Disable caching to ensure language changes take effect immediately
+      order: ['navigator', 'querystring', 'cookie', 'localStorage', 'sessionStorage', 'htmlTag'],
+      lookupQuerystring: 'lng',
+      lookupCookie: 'i18next',
+      lookupLocalStorage: 'i18nextLng',
+      lookupSessionStorage: 'i18nextLng',
+      caches: ['localStorage'],
+      excludeCacheFor: ['cimode'],
     },
     interpolation: {
       escapeValue: false

@@ -78,18 +78,20 @@ const Index = () => {
       </div>
 
       <div className="relative z-10 container mx-auto px-4 py-8">
-        <div className="flex justify-between items-start">
-          {userInfo && (
-            <Button
-              variant="outline"
-              size="icon"
-              onClick={handleReset}
-              className="bg-black/30 border-white/10 hover:bg-black/50"
-            >
-              <Home className="h-4 w-4 text-white" />
-            </Button>
-          )}
-          <div className="ml-auto">
+        <div className="flex justify-between items-start w-full">
+          <div className="w-12"> {/* Fixed width container for home button */}
+            {userInfo && (
+              <Button
+                variant="outline"
+                size="icon"
+                onClick={handleReset}
+                className="bg-black/30 border-white/10 hover:bg-black/50"
+              >
+                <Home className="h-4 w-4 text-white" />
+              </Button>
+            )}
+          </div>
+          <div>
             <LanguageSelector />
           </div>
         </div>
