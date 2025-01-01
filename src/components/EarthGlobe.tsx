@@ -79,11 +79,14 @@ export function EarthGlobe({ targetLocation }: EarthGlobeProps) {
       cleanupRef.current = null;
     }
 
+    const currentPos = mapRef.current.getPosition();
+    const startPos: [number, number] = [currentPos[0], currentPos[1]];
+    
     if (!targetLocation) {
       // Reset to initial position when no target location is provided
       cleanupRef.current = animateToPosition(
         mapRef.current,
-        mapRef.current.getPosition(),
+        startPos,
         [20.0, 0.0],
         mapRef.current.getZoom(),
         2.5,
@@ -93,8 +96,6 @@ export function EarthGlobe({ targetLocation }: EarthGlobeProps) {
       return;
     }
 
-    const currentPos = mapRef.current.getPosition();
-    const startPos: [number, number] = [currentPos[0], currentPos[1]];
     const targetPos: [number, number] = [targetLocation.latitude, targetLocation.longitude];
 
     cleanupRef.current = animateToPosition(
