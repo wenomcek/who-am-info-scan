@@ -7,7 +7,7 @@ export const initializeMap = (elementId: string) => {
   try {
     const options = {
       atmosphere: true,
-      center: [20.0, 0.0],
+      center: [20.0, 0.0] as [number, number], // Explicitly type as tuple
       zoom: 2.5,
       dragging: true,
       scrollWheelZoom: true
