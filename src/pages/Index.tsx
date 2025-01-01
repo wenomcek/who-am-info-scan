@@ -77,26 +77,20 @@ const Index = () => {
         <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/50 to-transparent pointer-events-none" />
       </div>
 
-      <div className="relative z-10 container mx-auto px-4 py-8">
-        <div className="flex justify-between items-start w-full">
-          <div className="w-12"> {/* Fixed width container for home button */}
-            {userInfo && (
-              <Button
-                variant="outline"
-                size="icon"
-                onClick={handleReset}
-                className="bg-black/30 border-white/10 hover:bg-black/50"
-              >
-                <Home className="h-4 w-4 text-white" />
-              </Button>
-            )}
-          </div>
-          <div>
-            <LanguageSelector />
-          </div>
+      <div className="relative z-10 w-full">
+        <div className="flex justify-between items-start p-4">
+          <Button
+            variant="outline"
+            size="icon"
+            onClick={handleReset}
+            className={`bg-black/30 border-white/10 hover:bg-black/50 ${!userInfo ? 'opacity-0 pointer-events-none' : ''}`}
+          >
+            <Home className="h-4 w-4 text-white" />
+          </Button>
+          <LanguageSelector />
         </div>
         
-        <div className="min-h-screen flex flex-col items-center justify-center">
+        <div className="min-h-[calc(100vh-80px)] flex flex-col items-center justify-center">
           <AnimatePresence>
             {!userInfo && (
               <>
