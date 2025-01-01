@@ -22,7 +22,6 @@ export function EarthGlobe({ targetLocation }: EarthGlobeProps) {
   const markerRef = useRef<any>(null);
   const cleanupRef = useRef<(() => void) | null>(null);
 
-  // Initialize map
   useEffect(() => {
     const script = document.createElement('script');
     script.src = 'https://www.webglearth.com/v2/api.js';
@@ -39,14 +38,14 @@ export function EarthGlobe({ targetLocation }: EarthGlobeProps) {
     `;
     document.head.appendChild(style);
 
-    script.onload = () => {
+    const initMap = () => {
       const map = initializeMap('earth-map');
       if (map) {
         mapRef.current = map;
-        map.setView([20.0, 0.0], 2.5);
       }
     };
 
+    script.onload = initMap;
     document.body.appendChild(script);
 
     return () => {
@@ -60,17 +59,14 @@ export function EarthGlobe({ targetLocation }: EarthGlobeProps) {
     };
   }, []);
 
-  // Handle target location changes
   useEffect(() => {
     if (!mapRef.current) return;
 
-    // Remove existing marker
     if (markerRef.current) {
       markerRef.current.removeFrom(mapRef.current);
       markerRef.current = null;
     }
 
-    // Cancel ongoing animation
     if (cleanupRef.current) {
       cleanupRef.current();
       cleanupRef.current = null;

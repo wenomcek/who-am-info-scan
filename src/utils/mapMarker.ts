@@ -1,11 +1,17 @@
 export const createMarker = (map: any, latitude: number, longitude: number, locationText?: string) => {
-  const marker = window.WE.marker([latitude, longitude])
-    .addTo(map)
+  if (!map || !window.WE) return null;
+
+  const marker = window.WE.marker([latitude, longitude]);
+  
+  marker.addTo(map)
     .bindPopup(locationText || "Location", { 
       maxWidth: 120,
       className: 'we-pp'
     });
   
-  marker.openPopup();
+  setTimeout(() => {
+    marker.openPopup();
+  }, 100);
+
   return marker;
 };
