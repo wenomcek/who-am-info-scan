@@ -7,12 +7,18 @@ export const animateToPosition = (
   duration: number,
   onComplete: () => void
 ) => {
-  if (!map) return () => {};
+  if (!map) {
+    console.error('Map not available for animation');
+    return () => {};
+  }
   
   const startTime = performance.now();
   let animationFrame: number;
+  let isCancelled = false;
 
   const animate = (currentTime: number) => {
+    if (isCancelled) return;
+
     const elapsed = currentTime - startTime;
     const progress = Math.min(elapsed / duration, 1);
 
@@ -23,7 +29,13 @@ export const animateToPosition = (
     const currentLng = startPos[1] + (targetPos[1] - startPos[1]) * easeProgress;
     const currentZoom = startZoom + (targetZoom - startZoom) * easeProgress;
 
-    map.setView([currentLat, currentLng], currentZoom);
+    try {
+      map.setView([currentLat, currentLng], currentZoom);
+    } catch (error) {
+      console.error('Error during animation:', error);
+      isCancelled = true;
+      return;
+    }
 
     if (progress < 1) {
       animationFrame = requestAnimationFrame(animate);
@@ -34,5 +46,9 @@ export const animateToPosition = (
   };
 
   animationFrame = requestAnimationFrame(animate);
-  return () => cancelAnimationFrame(animationFrame);
+  
+  return () => {
+    isCancelled = true;
+    cancelAnimationFrame(animationFrame);
+  };
 };
